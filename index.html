@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Encuesta ParquiTEC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    h1 { text-align: center; color: #333; }
+    label { font-weight: bold; margin-top: 15px; display: block; }
+    select, input, button {
+      width: 100%; padding: 8px; margin-top: 5px;
+      border: 1px solid #ccc; border-radius: 5px;
+    }
+    button {
+      margin-top: 20px; background: #2c3e50; color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Encuesta de Satisfacción - ParquiTEC</h1>
+
+<form id="encuestaForm">
+  <label>Edad:</label>
+  <input type="number" id="edad" required>
+
+  <label>Género:</label>
+  <select id="genero" required>
+    <option value="">Selecciona</option>
+    <option value="Femenino">Femenino</option>
+    <option value="Masculino">Masculino</option>
+    <option value="Otro">Otro</option>
+  </select>
+
+  <label>1. Facilidad de uso (1: Muy difícil - 5: Muy fácil)</label>
+  <select id="facilidad_uso" required>
+    <option value="">Selecciona</option>
+    <option value="1">1</option><option value="2">2</option>
+    <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+  </select>
+
+  <label>2. Facilidad para encontrar espacio</label>
+  <select id="espacio_facil" required>
+    <option value="">Selecciona</option>
+    <option value="1">1</option><option value="2">2</option>
+    <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+  </select>
+
+  <label>3. Utilidad de visualización de espacios</label>
+  <select id="utilidad_visualizacion" required>
+    <option value="">Selecciona</option>
+    <option value="1">1</option><option value="2">2</option>
+    <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+  </select>
+
+  <label>4. Facilidad en el proceso de pago</label>
+  <select id="pago_facil" required>
+    <option value="">Selecciona</option>
+    <option value="1">1</option><option value="2">2</option>
+    <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+  </select>
+
+  <label>5. Claridad en las notificaciones</label>
+  <select id="notificaciones_claras" required>
+    <option value="">Selecciona</option>
+    <option value="1">1</option><option value="2">2</option>
+    <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+  </select>
+
+  <label>6. Alertas a tiempo</label>
+  <select id="alertas_a_tiempo" required>
+    <option value="">Selecciona</option>
+    <option value="1">1</option><option value="2">2</option>
+    <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+  </select>
+
+  <label>7. Satisfacción con diseño y apariencia</label>
+  <select id="diseno_satisfactorio" required>
+    <option value="">Selecciona</option>
+    <option value="1">1</option><option value="2">2</option>
+    <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+  </select>
+
+  <label>8. Justicia del sistema de multas</label>
+  <select id="justicia_multas" required>
+    <option value="">Selecciona</option>
+    <option value="1">1</option><option value="2">2</option>
+    <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+  </select>
+
+  <label>9. Método de pago</label>
+  <select id="metodo_pago" required>
+    <option value="">Selecciona</option>
+    <option value="Tarjeta">Tarjeta</option>
+    <option value="Efectivo">Efectivo</option>
+    <option value="Billetera">Billetera</option>
+  </select>
+
+  <label>10. Problemas técnicos (0: No, 1: Sí)</label>
+  <select id="problemas_tecnicos" required>
+    <option value="">Selecciona</option>
+    <option value="0">No</option>
+    <option value="1">Sí</option>
+  </select>
+
+  <label>11. ¿Recomendarías ParquiTEC? (1: Nada - 5: Totalmente)</label>
+  <select id="recomendacion" required>
+    <option value="">Selecciona</option>
+    <option value="1">1</option><option value="2">2</option>
+    <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+  </select>
+
+  <button type="submit">Enviar</button>
+</form>
+
+<script>
+  const formulario = document.getElementById('encuestaForm');
+
+  formulario.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const fecha = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+    const datos = {
+      fecha: fecha,
+      edad: parseInt(document.getElementById('edad').value),
+      genero: document.getElementById('genero').value,
+      facilidad_uso: parseInt(document.getElementById('facilidad_uso').value),
+      espacio_facil: parseInt(document.getElementById('espacio_facil').value),
+      utilidad_visualizacion: parseInt(document.getElementById('utilidad_visualizacion').value),
+      pago_facil: parseInt(document.getElementById('pago_facil').value),
+      notificaciones_claras: parseInt(document.getElementById('notificaciones_claras').value),
+      alertas_a_tiempo: parseInt(document.getElementById('alertas_a_tiempo').value),
+      diseno_satisfactorio: parseInt(document.getElementById('diseno_satisfactorio').value),
+      justicia_multas: parseInt(document.getElementById('justicia_multas').value),
+      metodo_pago: document.getElementById('metodo_pago').value,
+      problemas_tecnicos: parseInt(document.getElementById('problemas_tecnicos').value),
+      recomendacion: parseInt(document.getElementById('recomendacion').value)
+    };
+
+    // URL de la API de Power BI que debes copiar de tu conjunto de datos en streaming
+    const url = "PEGAR_URL_AQUI";
+
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(datos),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        alert("¡Gracias! Tu respuesta ha sido enviada.");
+        formulario.reset();
+      } else {
+        alert("Error al enviar los datos.");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  });
+</script>
+
+</body>
+</html>
