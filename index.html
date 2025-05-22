@@ -34,6 +34,10 @@
 <h1>Encuesta de Satisfacción - ParquiTEC</h1>
 
 <form id="encuestaForm">
+  <!-- NUEVO CAMPO -->
+  <label>Nombre completo:</label>
+  <input type="text" id="nombre" required>
+
   <label>Edad:</label>
   <input type="number" id="edad" required>
 
@@ -45,7 +49,7 @@
     <option value="Otro">Otro</option>
   </select>
 
-  <label>1. Facilidad de uso (1: Muy difícil - 5: Muy fácil)</label>
+  <label>1. Facilidad de uso (1 a 5)</label>
   <select id="facilidad_uso" required>
     <option value="">Selecciona</option>
     <option value="1">1</option><option value="2">2</option>
@@ -116,7 +120,7 @@
     <option value="1">Sí</option>
   </select>
 
-  <label>11. ¿Recomendarías ParquiTEC? (1: Nada - 5: Totalmente)</label>
+  <label>11. ¿Recomendarías ParquiTEC? (1 a 5)</label>
   <select id="recomendacion" required>
     <option value="">Selecciona</option>
     <option value="1">1</option><option value="2">2</option>
@@ -132,27 +136,28 @@
   formulario.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const fecha = new Date().toISOString().slice(0, 19).replace("T", " ");
+    const fecha = new Date().toISOString();
 
     const datos = {
       fecha: fecha,
-      edad: parseInt(document.getElementById('edad').value),
+      nombre: document.getElementById('nombre').value,
+      edad: parseFloat(document.getElementById('edad').value),
       genero: document.getElementById('genero').value,
-      facilidad_uso: parseInt(document.getElementById('facilidad_uso').value),
-      espacio_facil: parseInt(document.getElementById('espacio_facil').value),
-      utilidad_visualizacion: parseInt(document.getElementById('utilidad_visualizacion').value),
-      pago_facil: parseInt(document.getElementById('pago_facil').value),
-      notificaciones_claras: parseInt(document.getElementById('notificaciones_claras').value),
-      alertas_a_tiempo: parseInt(document.getElementById('alertas_a_tiempo').value),
-      diseno_satisfactorio: parseInt(document.getElementById('diseno_satisfactorio').value),
-      justicia_multas: parseInt(document.getElementById('justicia_multas').value),
+      facilidad_uso: parseFloat(document.getElementById('facilidad_uso').value),
+      espacio_facil: parseFloat(document.getElementById('espacio_facil').value),
+      utilidad_visualizacion: parseFloat(document.getElementById('utilidad_visualizacion').value),
+      pago_facil: parseFloat(document.getElementById('pago_facil').value),
+      notificaciones_claras: parseFloat(document.getElementById('notificaciones_claras').value),
+      alertas_a_tiempo: parseFloat(document.getElementById('alertas_a_tiempo').value),
+      diseno_satisfactorio: parseFloat(document.getElementById('diseno_satisfactorio').value),
+      justicia_multas: parseFloat(document.getElementById('justicia_multas').value),
       metodo_pago: document.getElementById('metodo_pago').value,
-      problemas_tecnicos: parseInt(document.getElementById('problemas_tecnicos').value),
-      recomendacion: parseInt(document.getElementById('recomendacion').value)
+      problemas_tecnicos: parseFloat(document.getElementById('problemas_tecnicos').value),
+      recomendacion: parseFloat(document.getElementById('recomendacion').value)
     };
 
-    // URL de la API de Power BI que debes copiar de tu conjunto de datos en streaming
-    const url = "PEGAR_URL_AQUI";
+    // Inserta aquí tu URL de API de Power BI
+    const url = "https://api.powerbi.com/beta/ab7e9feb-d13b-4893-9106-4d47b99392da/datasets/161a74ab-50b5-48b2-8a93-35e08bc31ba6/rows?experience=power-bi&key=yRDZBZ%2BgD3F7cYA%2FATxmtbNkRlDO%2B8eMs3z0dHKMghjYtZpq1CsPEnBsqxmLEztNjSzQzjCIBhheD5dtx3Y2dQ%3D%3D";
 
     fetch(url, {
       method: "POST",
